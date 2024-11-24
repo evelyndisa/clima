@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Form from './Form';
+import Card from './Card';
 
 export default function WeatherPanel(){
 
@@ -61,6 +62,12 @@ export default function WeatherPanel(){
     
             <Form
                 newLocation = {getLocation}
+            />
+            <Card
+                showData = {show} //mostrar
+                loadingData = {loading} //visuaizar spinner
+                weather = {weather} //datos del tiempo
+                forecast = {forecast} //datos de la prediccion
             />
 
         </React.Fragment>
