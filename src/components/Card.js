@@ -1,5 +1,5 @@
-import React from "react";
-import Spinner from "./Spinner";
+import React from "react"
+import Spinner from "./Spinner"
 import '../assets/css/Card.css'
                                     //se visualiza o no los datos
 export default function Card({loadingData, showData, weather, forecast}){ //weather: nombre de la ciudad
@@ -10,9 +10,9 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     const year = today.getFullYear()
     const date = day + '/' + month + '/' + year
 
+    //almacenar las URLs de los iconos de clima y los datos de las predicciones.
     let url = ""
     let iconUrl = ""
-
     let iconUrl3hr = ""
     let iconUrl6hr = ""
     let iconUrl9hr = ""
@@ -28,18 +28,19 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     }
 
     if(showData){
-        url = "http://openweathermap.org/img/w/"; //para obtener el icon
-        iconUrl = url + weather.weather[0].icon + ".png"; //accedemos a los icons
-        
+        url = "http://openweathermap.org/img/w/" //URL basee para acceder a los iconos del clima
+
+        iconUrl = url + weather.weather[0].icon + ".png" //accedemos a los icons del clima actul
+        //accedemos a los iconos de las predicciones
         iconUrl3hr = url + forecast.list[1].weather[0].icon + ".png"
         iconUrl6hr = url + forecast.list[2].weather[0].icon + ".png"
         iconUrl9hr = url + forecast.list[3].weather[0].icon + ".png"
         iconUrl12hr = url + forecast.list[4].weather[0].icon + ".png"
-                //accedemos al dato        extraemos caracteres
-        forecastDate3 = forecast.list[1].dt_txt.substring(8, 10) + '/' + forecast.list[1].dt_txt.substring(5, 7) + '/' + forecast.list[1].dt_txt.substring(0, 4) + ' ' +  forecast.list[1].dt_txt.substring(11, 13);
-        forecastDate6 = forecast.list[2].dt_txt.substring(8, 10) + '/' + forecast.list[2].dt_txt.substring(5, 7) + '/' + forecast.list[2].dt_txt.substring(0, 4) + ' ' +  forecast.list[2].dt_txt.substring(11, 13);
-        forecastDate9 = forecast.list[3].dt_txt.substring(8, 10) + '/' + forecast.list[3].dt_txt.substring(5, 7) + '/' + forecast.list[3].dt_txt.substring(0, 4) + ' ' +  forecast.list[3].dt_txt.substring(11, 13);
-        forecastDate12 = forecast.list[4].dt_txt.substring(8, 10) + '/' + forecast.list[4].dt_txt.substring(5, 7) + '/' + forecast.list[4].dt_txt.substring(0, 4) + ' ' +  forecast.list[4].dt_txt.substring(11, 13);
+        //accedemos al dato y extraemos caracteres: formateando fechas y horas de las predicciones "dd/mm/yyyy hh"
+        forecastDate3 = forecast.list[1].dt_txt.substring(8, 10) + '/' + forecast.list[1].dt_txt.substring(5, 7) + '/' + forecast.list[1].dt_txt.substring(0, 4) + ' ' +  forecast.list[1].dt_txt.substring(11, 13)
+        forecastDate6 = forecast.list[2].dt_txt.substring(8, 10) + '/' + forecast.list[2].dt_txt.substring(5, 7) + '/' + forecast.list[2].dt_txt.substring(0, 4) + ' ' +  forecast.list[2].dt_txt.substring(11, 13)
+        forecastDate9 = forecast.list[3].dt_txt.substring(8, 10) + '/' + forecast.list[3].dt_txt.substring(5, 7) + '/' + forecast.list[3].dt_txt.substring(0, 4) + ' ' +  forecast.list[3].dt_txt.substring(11, 13)
+        forecastDate12 = forecast.list[4].dt_txt.substring(8, 10) + '/' + forecast.list[4].dt_txt.substring(5, 7) + '/' + forecast.list[4].dt_txt.substring(0, 4) + ' ' +  forecast.list[4].dt_txt.substring(11, 13)
     }
 
 
@@ -59,6 +60,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                                 </div>
                                 <div className="col-md-8">
                                     <div className="card-body text-start mt-2">
+                                        {/* 0 °C = 273.15 K. */}
                                     <h5 className="card-text">Temperatura máxima: {(weather.main.temp_max - 273.15).toFixed(1)}ºC</h5>
                                         <h5 className="card-text">Temperatura mínima: {(weather.main.temp_min - 273.15).toFixed(1)}ºC</h5>
                                         <h5 className="card-text">sensación térmica: {(weather.main.feels_like- 273.15).toFixed(1)}ºC</h5>

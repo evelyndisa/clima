@@ -12,8 +12,8 @@ export default function WeatherPanel(){
 
     const [weather, setWeather] = useState([]); //almacenar los datos del clima actual
     const [forecast, setForecast] = useState([]); //almacenar los datos del pronostico
-    const [loading, setLoading] = useState(false); //spinner de carga
-    const [show, setShow] = useState(false); //mostrar los datos cuando esten disponibles
+    const [loading, setLoading] = useState(false); //controla si se está cargando la información (para mostrar un spinner)
+    const [show, setShow] = useState(false); //mostrar los datos cuando esten cargados
     const [location, setLocation] = useState(""); //almacenar la ciudad ingresada
 
     //obtenemos la ciudad y hacemos solicitudes a la API
