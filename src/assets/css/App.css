@@ -1,6 +1,8 @@
 body{
-  background-color: #2f3544;
+  background: rgb(104,94,156);
+  background: radial-gradient(circle, rgba(104,94,156,1) 15%, rgba(54,47,103,1) 78%);
 }
+
 .App {
   text-align: center;
 }

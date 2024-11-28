@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Form from './Form';
+import Nav from './Nav';
 import Card from './Card';
 
 export default function WeatherPanel(){
@@ -60,7 +60,7 @@ export default function WeatherPanel(){
     return(
         <React.Fragment>
     
-            <Form
+            <Nav
                 newLocation = {getLocation}
             />
             <Card

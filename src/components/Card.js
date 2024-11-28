@@ -89,8 +89,6 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                                             <p className="description"><img src={iconUrl12hr} alt="icon"/>{forecast.list[4].weather[0].description}</p>
                                             <p className="temp">{(forecast.list[4].main.temp - 273.15).toFixed(1)}ºC</p>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>

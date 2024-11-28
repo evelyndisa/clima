@@ -1,0 +1,12 @@
+.nav{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+.nav h1{
+    color:#fff;
+    font-weight: 400;
+}
