@@ -7,17 +7,16 @@ export default function Nav ({newLocation}){
     const onSubmit = (e) => {
         e.preventDefault()
         console.log({city})
-        if(city === '' || !city) return newLocation(city)
-    }
+        if(city === '' || !city) return 
 
+        newLocation(city)
+    }
     return(
         <nav className="nav">
-            <h1 className="">Weather</h1>
-            <form onSubmit={onSubmit}>
-                <div className="input-group mb-3 mx-auto">
+            <h1>Weather</h1>
+            <form onSubmit={onSubmit} className="form-search-weather">
                     <input type="text" className="form-control" placeholder="Ciudad" onChange={(e)=>setCity(e.target.value)} />
-                    <button className="btn btn-primary input-group-text" type="submit">Buscar</button>
-                </div>
+                    <button className=" button-magnifier" type="submit"><img src="./images/magnifier.png"  alt="search icon"/></button>
             </form>
         </nav>
     )
