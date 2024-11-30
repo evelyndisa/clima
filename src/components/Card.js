@@ -43,8 +43,58 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
         forecastDate12 = forecast.list[4].dt_txt.substring(8, 10) + '/' + forecast.list[4].dt_txt.substring(5, 7) + '/' + forecast.list[4].dt_txt.substring(0, 4) + ' ' +  forecast.list[4].dt_txt.substring(11, 13)
     }
 
+    const capitalized = (sentence) => {
+        return !sentence ? '' : sentence.charAt(0).toUpperCase() + sentence.slice(1);
+      };
+      
 
+      //const iconMap = {
+      //  "clear sky": {
+      //  day: "/images/icons/clear-sky-day.png",
+      //  night: "/images/icons/clear-sky-night.png",
+      //  },
+      //  "few clouds": {
+      //    day: "/images/icons/few-clouds-day.png",
+      //    night: "/images/icons/few-clouds-night.png",
+      //  },
+      //  "scattered clouds": "/images/icons/scattered-clouds.png",
+      //  "broken clouds": "/images/icons/broken-clouds.png",
+      //  "shower rain": "/images/icons/shower-rain.png",
+      //  "rain": "/images/icons/rain.png",
+      //  "thunderstorm": "/images/icons/thunderstorm.png",
+      //  "snow": "/images/icons/snow.png",
+      //  "mist": "/images/icons/mist.png",
+      //};
+      
+      
     return (
+        <>
+
+            <div>
+                { showData === true ? (
+                    <div>
+                        <div className="weather">
+                            <img src={iconUrl} alt="icon weather" className="icon-weather"/>
+                            <h3 className="title-city">{weather.name}</h3>
+                            <p className="date-card">{date}</p>
+                            <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
+                            <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
+                        </div>
+                    <div>
+                        
+                    </div>
+                        
+                    </div>
+                    
+                ) 
+                
+                
+                
+                : ( <h2 className="text-light">No se encuentran resultados, corraborar que sea una ciudad existente.</h2> )}
+            </div>
+
+
+        
         <div className="mt-5">
             {
                 showData === true ? (
@@ -99,5 +149,6 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                 )
             }
         </div>
+        </>
     )
 }
