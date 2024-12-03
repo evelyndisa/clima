@@ -8,6 +8,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     const day = today.getDate()
     const month = today.getMonth() + 1
     const year = today.getFullYear()
+    const hour = today.getHours()
     const date = day + '/' + month + '/' + year
 
     //almacenar las URLs de los iconos de clima y los datos de las predicciones.
@@ -31,7 +32,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     if(showData){
         url = "http://openweathermap.org/img/w/" //URL base para acceder a los iconos del clima
 
-        iconUrl = url + weather.weather[0].icon + ".png" //accedemos a los icons del clima actul
+        iconUrl = url + weather.weather[0].icon + ".png" //accedemos a los icons del clima actual
         //accedemos a los iconos de las predicciones
         iconUrl3hr = url + forecast.list[1].weather[0].icon + ".png"
         iconUrl6hr = url + forecast.list[2].weather[0].icon + ".png"
@@ -48,60 +49,50 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
         return !sentence ? '' : sentence.charAt(0).toUpperCase() + sentence.slice(1);
       };
       
+    // custom icons
+    let clearSkyDay = '/images/icons/clear-sky-day.png'
+    let clearSkyNight = '/images/icons/clear-sky-night.png'
+    let fewCloudsDay = '/images/icons/few-clouds-day.png'
+    let fewCloudsNight = '/images/icons/few-clouds-night.png'
+    let scatteredClouds = '/images/icons/scattered-clouds.png'
+    let brokenClouds = '/images/icons/broken-clouds.png'
+    let showerRain = '/images/icons/shower-rain.png'
+    let rain = '/images/icons/rain.png'
+    let heavyRain = '/images/icons/thunderstorm.png'
+    let snow = '/images/icons/snow.png'
+    let mist = '/images/icons/mist.png'
+    let icon = ''
 
-      //const iconMap = {
-      //  "clear sky": {
-      //  day: "/images/icons/clear-sky-day.png",
-      //  night: "/images/icons/clear-sky-night.png",
-      //  },
-      //  "few clouds": {
-      //    day: "/images/icons/few-clouds-day.png",
-      //    night: "/images/icons/few-clouds-night.png",
-      //  },
-      //  "scattered clouds": "/images/icons/scattered-clouds.png",
-      //  "broken clouds": "/images/icons/broken-clouds.png",
-      //  "shower rain": "/images/icons/shower-rain.png",
-      //  "rain": "/images/icons/rain.png",
-      //  "thunderstorm": "/images/icons/thunderstorm.png",
-      //  "snow": "/images/icons/snow.png",
-      //  "mist": "/images/icons/mist.png",
-      //};
-      let fewCloudsNight = '/images/icons/few-clouds-night.png'
-      let scatteredClouds = '/images/icons/scattered-clouds.png'
-      let brokenClouds = '/images/icons/broken-clouds.png'
-      let clearSkyNight = '/images/icons/clear-sky-night.png'
-      let showerRain = '/images/icons/shower-rain.png'
-      let rain = '/images/icons/rain.png'
-      let snow = '/images/icons/snow.png'
-      let icon = ''
-      
     return (
         <>
-
             <div>
-                
                 { showData === true ? (
                     <div>
-                        {console.log(weather.weather[0].description, 'primer')}
-                        
+                        {console.log(weather.weather[0].description, ': description')}
                         <div className="weather">
                             {icon = weather.weather[0].description }
-                            <img src={icon === 'nubes' ? scatteredClouds : icon === 'algo de nubes' ? fewCloudsNight : icon === 'cielo claro' ? clearSkyNight : icon === 'muy nuboso' ? brokenClouds : icon === 'lluvia ligera' ? showerRain : icon === 'lluvia moderada' ? rain : icon === 'nevada ligera' ? snow : iconUrl } alt="icon weather" className="icon-weather"/>
+                            <img 
+                                src={ 
+                                  icon === 'nubes'  || icon === 'nubes dispersas' ? scatteredClouds : 
+                                  icon === 'algo de nubes' ? (hour >= 6 && hour <= 18 ? fewCloudsDay : fewCloudsNight) :
+                                  icon === 'cielo claro' ? (hour >= 6 && hour <= 18 ? clearSkyDay : clearSkyNight) :
+                                  icon === 'muy nuboso' ? brokenClouds :
+                                  icon === 'lluvia ligera' ? showerRain :
+                                  icon === 'lluvia moderada' ? rain :
+                                  icon === 'nevada ligera' ? snow :
+                                  icon === 'lluvia de gran intensidad' ? heavyRain :
+                                  icon === 'neblina' ? mist :
+                                  iconUrl 
+                                } 
+                                alt="icon weather" className="icon-weather"
+                            />
                             <h3 className="title-city">{weather.name}</h3>
                             <p className="date-card">{date}</p>
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
                         </div>
-                    <div>
-                        
                     </div>
-                        
-                    </div>
-                    
                 ) 
-                
-                
-                
                 : ( <h2 className="text-light">No se encuentran resultados, corraborar que sea una ciudad existente.</h2> )}
             </div>
 
