@@ -22,13 +22,14 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     let forecastDate6 = ""
     let forecastDate9 = ""
     let forecastDate12 = ""
+    
 
     if(loadingData){
         return  <Spinner />;
     }
 
     if(showData){
-        url = "http://openweathermap.org/img/w/" //URL basee para acceder a los iconos del clima
+        url = "http://openweathermap.org/img/w/" //URL base para acceder a los iconos del clima
 
         iconUrl = url + weather.weather[0].icon + ".png" //accedemos a los icons del clima actul
         //accedemos a los iconos de las predicciones
@@ -65,16 +66,27 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
       //  "snow": "/images/icons/snow.png",
       //  "mist": "/images/icons/mist.png",
       //};
-      
+      let fewCloudsNight = '/images/icons/few-clouds-night.png'
+      let scatteredClouds = '/images/icons/scattered-clouds.png'
+      let brokenClouds = '/images/icons/broken-clouds.png'
+      let clearSkyNight = '/images/icons/clear-sky-night.png'
+      let showerRain = '/images/icons/shower-rain.png'
+      let rain = '/images/icons/rain.png'
+      let snow = '/images/icons/snow.png'
+      let icon = ''
       
     return (
         <>
 
             <div>
+                
                 { showData === true ? (
                     <div>
+                        {console.log(weather.weather[0].description, 'primer')}
+                        
                         <div className="weather">
-                            <img src={iconUrl} alt="icon weather" className="icon-weather"/>
+                            {icon = weather.weather[0].description }
+                            <img src={icon === 'nubes' ? scatteredClouds : icon === 'algo de nubes' ? fewCloudsNight : icon === 'cielo claro' ? clearSkyNight : icon === 'muy nuboso' ? brokenClouds : icon === 'lluvia ligera' ? showerRain : icon === 'lluvia moderada' ? rain : icon === 'nevada ligera' ? snow : iconUrl } alt="icon weather" className="icon-weather"/>
                             <h3 className="title-city">{weather.name}</h3>
                             <p className="date-card">{date}</p>
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
