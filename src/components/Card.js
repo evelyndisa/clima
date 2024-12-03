@@ -74,8 +74,8 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                             <img 
                                 src={ 
                                   icon === 'nubes'  || icon === 'nubes dispersas' ? scatteredClouds : 
-                                  icon === 'algo de nubes' ? (hour >= 6 && hour <= 18 ? fewCloudsDay : fewCloudsNight) :
-                                  icon === 'cielo claro' ? (hour >= 6 && hour <= 18 ? clearSkyDay : clearSkyNight) :
+                                  icon === 'algo de nubes' ? (hour >= 6 && hour <= 19 ? fewCloudsDay : fewCloudsNight) :
+                                  icon === 'cielo claro' ? (hour >= 6 && hour <= 19 ? clearSkyDay : clearSkyNight) :
                                   icon === 'muy nuboso' ? brokenClouds :
                                   icon === 'lluvia ligera' ? showerRain :
                                   icon === 'lluvia moderada' ? rain :
