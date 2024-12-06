@@ -1,157 +1,67 @@
 import React from "react"
 import Spinner from "./Spinner"
 import '../assets/css/Card.css'
-                                    //se visualiza o no los datos
+import CustomImage from "./CustomImage"
+
 export default function Card({loadingData, showData, weather, forecast}){ //weather: nombre de la ciudad
 
     const today = new Date()
     const day = today.getDate()
     const month = today.getMonth() + 1
     const year = today.getFullYear()
-    const hour = today.getHours()
     const date = day + '/' + month + '/' + year
-
-    //almacenar las URLs de los iconos de clima y los datos de las predicciones.
-    let url = ""
-    let iconUrl = ""
-    let iconUrl3hr = ""
-    let iconUrl6hr = ""
-    let iconUrl9hr = ""
-    let iconUrl12hr = ""
-
-    let forecastDate3 = ""
-    let forecastDate6 = ""
-    let forecastDate9 = ""
-    let forecastDate12 = ""
-    
 
     if(loadingData){
         return  <Spinner />;
     }
 
-    if(showData){
-        url = "http://openweathermap.org/img/w/" //URL base para acceder a los iconos del clima
-
-        iconUrl = url + weather.weather[0].icon + ".png" //accedemos a los icons del clima actual
-        //accedemos a los iconos de las predicciones
-        iconUrl3hr = url + forecast.list[1].weather[0].icon + ".png"
-        iconUrl6hr = url + forecast.list[2].weather[0].icon + ".png"
-        iconUrl9hr = url + forecast.list[3].weather[0].icon + ".png"
-        iconUrl12hr = url + forecast.list[4].weather[0].icon + ".png"
-        //accedemos al dato y extraemos caracteres: formateando fechas y horas de las predicciones "dd/mm/yyyy hh"
-        forecastDate3 = forecast.list[1].dt_txt.substring(8, 10) + '/' + forecast.list[1].dt_txt.substring(5, 7) + '/' + forecast.list[1].dt_txt.substring(0, 4) + ' ' +  forecast.list[1].dt_txt.substring(11, 13)
-        forecastDate6 = forecast.list[2].dt_txt.substring(8, 10) + '/' + forecast.list[2].dt_txt.substring(5, 7) + '/' + forecast.list[2].dt_txt.substring(0, 4) + ' ' +  forecast.list[2].dt_txt.substring(11, 13)
-        forecastDate9 = forecast.list[3].dt_txt.substring(8, 10) + '/' + forecast.list[3].dt_txt.substring(5, 7) + '/' + forecast.list[3].dt_txt.substring(0, 4) + ' ' +  forecast.list[3].dt_txt.substring(11, 13)
-        forecastDate12 = forecast.list[4].dt_txt.substring(8, 10) + '/' + forecast.list[4].dt_txt.substring(5, 7) + '/' + forecast.list[4].dt_txt.substring(0, 4) + ' ' +  forecast.list[4].dt_txt.substring(11, 13)
-    }
-
     const capitalized = (sentence) => {
         return !sentence ? '' : sentence.charAt(0).toUpperCase() + sentence.slice(1);
       };
-      
-    // custom icons
-    let clearSkyDay = '/images/icons/clear-sky-day.png'
-    let clearSkyNight = '/images/icons/clear-sky-night.png'
-    let fewCloudsDay = '/images/icons/few-clouds-day.png'
-    let fewCloudsNight = '/images/icons/few-clouds-night.png'
-    let scatteredClouds = '/images/icons/scattered-clouds.png'
-    let brokenClouds = '/images/icons/broken-clouds.png'
-    let showerRain = '/images/icons/shower-rain.png'
-    let rain = '/images/icons/rain.png'
-    let heavyRain = '/images/icons/thunderstorm.png'
-    let snow = '/images/icons/snow.png'
-    let mist = '/images/icons/mist.png'
-    let icon = ''
+      const showErrorMessage = !weather && showData;
+
 
     return (
         <>
             <div>
+            {showErrorMessage && (
+                <div>
+                    <h2 className="text-light">No se encuentran resultados, por favor verifica que el nombre de la ciudad sea correcto.</h2>
+                </div>
+            )}
+            {!showData && !weather && (
+                <h2 className="text-light">No se encuentran resultados, por favor verifica que el nombre de la ciudad sea correcto.</h2>
+            )}
+
                 { showData === true ? (
                     <div>
                         {console.log(weather.weather[0].description, ': description')}
                         <div className="weather">
-                            {icon = weather.weather[0].description }
-                            <img 
-                                src={ 
-                                  icon === 'nubes'  || icon === 'nubes dispersas' ? scatteredClouds : 
-                                  icon === 'algo de nubes' ? (hour >= 6 && hour <= 19 ? fewCloudsDay : fewCloudsNight) :
-                                  icon === 'cielo claro' ? (hour >= 6 && hour <= 19 ? clearSkyDay : clearSkyNight) :
-                                  icon === 'muy nuboso' ? brokenClouds :
-                                  icon === 'lluvia ligera' ? showerRain :
-                                  icon === 'lluvia moderada' ? rain :
-                                  icon === 'nevada ligera' ? snow :
-                                  icon === 'lluvia de gran intensidad' ? heavyRain :
-                                  icon === 'neblina' ? mist :
-                                  iconUrl 
-                                } 
-                                alt="icon weather" className="icon-weather"
-                            />
+                            <CustomImage weather={weather}/>
                             <h3 className="title-city">{weather.name}</h3>
                             <p className="date-card">{date}</p>
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
                         </div>
-                    </div>
-                ) 
-                : ( <h2 className="text-light">No se encuentran resultados, corraborar que sea una ciudad existente.</h2> )}
-            </div>
-
-
-        
-        <div className="mt-5">
-            {
-                showData === true ? (
-                    <div className="container">
-                        <div className="card mb-3 mx-auto bg-dark text-light">
-                            <div className="row g-0">
-                                <div className="col-md-4">
-                                    <h3 className="card-title">{weather.name}</h3>
-                                    <p className="card-date">{date}</p>
-                                    <h1 className="card-temp">{(weather.main.temp - 273.15).toFixed(1)}ºC</h1> {/* convertir a celsius, restamos la constante kelvin */}
-                                    <p className="card-desc"><img src={iconUrl} alt="icon weather"/>{weather.weather[0].description}</p> {/* acceso a la descripcion y logo*/ }
-                                    <img src="/images/card.png" className="img-fluid rounded-start" alt="..."/>
+                        <hr />
+                        <div className="row mt-4">
+                            {[1, 2, 3, 4].map((index) => {
+                              const forecastData = forecast.list[index];
+                              const forecastHour = parseInt(forecastData.dt_txt.substring(11, 13)); // Hora del pronóstico
+                              return (
+                                <div className="col" key={index}>
+                                  <p>{forecastData.dt_txt.substring(8, 10)}/{forecastData.dt_txt.substring(5, 7)} {forecastHour}hs</p>
+                                  <CustomImage weather={forecastData} hour={forecastHour} className='custom-forecast'/>
+                                  <p className="temp">{(forecastData.main.temp - 273.15).toFixed(1)}ºC</p>
                                 </div>
-                                <div className="col-md-8">
-                                    <div className="card-body text-start mt-2">
-                                        {/* 0 °C = 273.15 K. */}
-                                    <h5 className="card-text">Temperatura máxima: {(weather.main.temp_max - 273.15).toFixed(1)}ºC</h5>
-                                        <h5 className="card-text">Temperatura mínima: {(weather.main.temp_min - 273.15).toFixed(1)}ºC</h5>
-                                        <h5 className="card-text">sensación térmica: {(weather.main.feels_like- 273.15).toFixed(1)}ºC</h5>
-                                        <h5 className="card-text">Humedad: {weather.main.humidity}%</h5>
-                                        <h5 className="card-text">Velocidad del viento: {weather.wind.speed}m/s</h5>
-                                    </div>
-                                    <hr />
-                                    <div className="row mt-4">
-                                        <div className="col">
-                                            <p>{forecastDate3}hs</p>
-                                            <p className="description"><img src={iconUrl3hr} alt="icon"/>{forecast.list[1].weather[0].description}</p>
-                                            <p className="temp">{(forecast.list[1].main.temp - 273.15).toFixed(1)}ºC</p>
-                                        </div>
-                                        <div className="col">
-                                            <p>{forecastDate6}hs</p>
-                                            <p className="description"><img src={iconUrl6hr} alt="icon"/>{forecast.list[2].weather[0].description}</p>
-                                            <p className="temp">{(forecast.list[2].main.temp - 273.15).toFixed(1)}ºC</p>
-                                        </div>
-                                        <div className="col">
-                                            <p>{forecastDate9}hs</p>
-                                            <p className="description"><img src={iconUrl9hr} alt="icon"/>{forecast.list[3].weather[0].description}</p>
-                                            <p className="temp">{(forecast.list[3].main.temp - 273.15).toFixed(1)}ºC</p>
-                                        </div>
-                                        <div className="col">
-                                            <p>{forecastDate12}hs</p>
-                                            <p className="description"><img src={iconUrl12hr} alt="icon"/>{forecast.list[4].weather[0].description}</p>
-                                            <p className="temp">{(forecast.list[4].main.temp - 273.15).toFixed(1)}ºC</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                );
+                            })}
                         </div>
                     </div>
-                ):(
-                    <h2 className="text-light">No se encuentran resultados, corraborar que sea una ciudad existente.</h2>
-                )
-            }
-        </div>
+                ):( 
+                    (!weather) ? <h2 className="text-light">No se encuentran resultados, corroborar que sea una ciudad existente.</h2> : 'pu'
+                )}
+            </div>
         </>
     )
 }

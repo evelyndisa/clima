@@ -3,7 +3,7 @@ import '../assets/css/Nav.css'
 
 export default function Nav ({newLocation}){
     const [city, setCity] = useState('')
-
+    
     const onSubmit = (e) => {
         e.preventDefault()
         console.log({city})
