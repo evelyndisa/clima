@@ -14,18 +14,16 @@ export default function WeatherPanel(){
     const [forecast, setForecast] = useState([]); //almacenar los datos del pronostico
     const [loading, setLoading] = useState(false); //controla si se está cargando la información (para mostrar un spinner)
     const [show, setShow] = useState(false); //mostrar los datos cuando esten cargados
-    const [location, setLocation] = useState(""); //almacenar la ciudad ingresada
 
     //obtenemos la ciudad y hacemos solicitudes a la API
     const getLocation = async(loc) => {
         setLoading(true); //inica el estado de carga
-        setLocation(loc); //ciudad
 
         // URL completa para obtener los datos del clima actual
         urlWeather = urlWeather + cityUrl + loc;
         // solicitud
         await fetch(urlWeather).then((response) =>{
-            if(!response.ok) throw {response}
+            if(!response.ok) throw Error(response.statusText || "Error en la solicitud")
             return response.json();
         }).then((weatherData) =>{
             console.log(weatherData);
@@ -41,7 +39,7 @@ export default function WeatherPanel(){
         urlForecast = urlForecast + cityUrl + loc;
         //solicitud
         await fetch(urlForecast).then((response) =>{
-            if(!response.ok) throw {response}
+            if(!response.ok) throw new Error(response.statusText || "Error en la solicitud")
             return response.json();
         }).then((forecastData) =>{
             console.log(forecastData);

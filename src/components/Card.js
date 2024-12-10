@@ -17,8 +17,8 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
 
     const capitalized = (sentence) => {
         return !sentence ? '' : sentence.charAt(0).toUpperCase() + sentence.slice(1);
-      };
-      const showErrorMessage = !weather && showData;
+      }
+    const showErrorMessage = !weather && showData
 
 
     return (
@@ -60,7 +60,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                     </div>
                 ):( 
                     (!weather) ? <h2 className="text-light">No se encuentran resultados, corroborar que sea una ciudad existente.</h2> : 'pu'
-                )}
+                    )}
             </div>
         </>
     )
