@@ -18,21 +18,11 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
     const capitalized = (sentence) => {
         return !sentence ? '' : sentence.charAt(0).toUpperCase() + sentence.slice(1);
       }
-    const showErrorMessage = !weather && showData
 
 
     return (
         <>
             <div>
-            {showErrorMessage && (
-                <div>
-                    <h2 className="text-light">No se encuentran resultados, por favor verifica que el nombre de la ciudad sea correcto.</h2>
-                </div>
-            )}
-            {!showData && !weather && (
-                <h2 className="text-light">No se encuentran resultados, por favor verifica que el nombre de la ciudad sea correcto.</h2>
-            )}
-
                 { showData === true ? (
                     <div>
                         {console.log(weather.weather[0].description, ': description')}
@@ -54,12 +44,12 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                                   <CustomImage weather={forecastData} hour={forecastHour} className='custom-forecast'/>
                                   <p className="temp">{(forecastData.main.temp - 273.15).toFixed(1)}ºC</p>
                                 </div>
-                                );
+                                )
                             })}
                         </div>
                     </div>
                 ):( 
-                    (!weather) ? <h2 className="text-light">No se encuentran resultados, corroborar que sea una ciudad existente.</h2> : 'pu'
+                    (!weather) ? <h2 className="text-light">No se encuentran resultados, corroborar que sea una ciudad existente.</h2> : 'Ingrese una ciudad'
                     )}
             </div>
         </>
