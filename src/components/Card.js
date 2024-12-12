@@ -2,6 +2,7 @@ import React from "react"
 import Spinner from "./Spinner"
 import '../assets/css/Card.css'
 import CustomImage from "./CustomImage"
+import CardDetails from "./CardDetails"
 
 export default function Card({loadingData, showData, weather, forecast}){ //weather: nombre de la ciudad
 
@@ -25,6 +26,11 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
             <div>
                 { showData === true ? (
                     <div>
+                        <div className="card-container">
+                        <div className="card-details">
+                            <CardDetails />
+                            <CardDetails />
+                        </div>
                         {console.log(weather.weather[0].description, ': description')}
                         <div className="weather">
                             <CustomImage weather={weather}/>
@@ -33,7 +39,12 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
                         </div>
-                        <hr />
+                        <div className="card-details">
+                            <CardDetails />
+                            <CardDetails />
+                        </div>
+                        </ div>
+                        <hr className="hr" />
                         <div className="row mt-4">
                             {[1, 2, 3, 4].map((index) => {
                               const forecastData = forecast.list[index];

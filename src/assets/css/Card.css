@@ -30,7 +30,7 @@
   
   .weather {
     margin: auto;
-    margin-top: 50px;
+    margin-top: 130px;
     width: 40%;
     padding: 20px;
     display: flex;
@@ -45,15 +45,14 @@
   
   .icon-weather {
     position: absolute;
-    top: -75px;
+    top: -100px;
     width: 150px;
     height: 150px;
-    padding: 20px;
   }
 
   .title-city{
     color: #fff;
-    margin-top: 20px;
+    margin-top: 40px;
   }
 
   .temp-card{
@@ -65,3 +64,22 @@
     height: 100px;
     position: inherit;
   }
+  .hr{
+    margin: auto;
+    margin-top: 80px;
+    width: 85%;
+  }
+
+  .card-container{
+    display: flex;
+    justify-content: center;
+}
+.card-details{
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 110px;
+  gap: 20px;
+
+}
