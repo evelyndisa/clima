@@ -28,8 +28,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                     <div>
                         <div className="card-container">
                         <div className="card-details">
-                            <CardDetails />
-                            <CardDetails />
+                            <CardDetails weather={weather} type='first'/>
                         </div>
                         {console.log(weather.weather[0].description, ': description')}
                         <div className="weather">
@@ -40,8 +39,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
                         </div>
                         <div className="card-details">
-                            <CardDetails />
-                            <CardDetails />
+                            <CardDetails weather={weather} type='second'/>
                         </div>
                         </ div>
                         <hr className="hr" />
