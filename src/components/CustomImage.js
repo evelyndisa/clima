@@ -17,6 +17,7 @@ export default function CustomImage({ weather, className }) {
   const showerRain = '/images/icons/shower-rain.png';
   const rain = '/images/icons/rain.png';
   const heavyRain = '/images/icons/thunderstorm.png';
+  const thunderstorm = '/images/icons/thunderstorm-rain.png';
   const snow = '/images/icons/snow.png';
   const mist = '/images/icons/mist.png';
 
@@ -50,6 +51,8 @@ export default function CustomImage({ weather, className }) {
           ? heavyRain
           : icon === 'neblina'
           ? mist
+          : icon === 'tormenta con lluvia'
+          ? thunderstorm
           : iconUrl
       }
       alt="icon weather"
