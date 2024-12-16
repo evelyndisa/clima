@@ -16,7 +16,7 @@ export default function CardDetails ({weather, type}){
                         <p className="card-details-description">{weather.main.humidity + '%'}</p>
                     </div>
                     <div className="card-details-container">
-                        {console.log(weather.main.pressure + ' hPa: humidity')}
+                        {console.log(weather.main.pressure + ' hPa: pressure')}
                         <p className="card-details-title">Pressure <img src="/images/cardDetails/pressure.png" alt="icon pressure"/></p>
                         <p className="card-details-description">{weather.main.pressure + ' hPa'}</p>
                     </div>

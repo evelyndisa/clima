@@ -35,6 +35,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                             <p className="date-card">{date}</p>
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
+                            <p>Min {(weather.main.temp_min - 273.15).toFixed(1)}ºC    -    Max{(weather.main.temp_max - 273.15).toFixed(1)}ºC</p>
                         </div>
                         <CardDetails weather={weather} type='second'/>
                         </ div>
