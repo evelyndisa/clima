@@ -27,9 +27,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                 { showData === true ? (
                     <div>
                         <div className="card-container">
-                        <div className="card-details">
-                            <CardDetails weather={weather} type='first'/>
-                        </div>
+                        <CardDetails weather={weather} type='first'/>
                         {console.log(weather.weather[0].description, ': description')}
                         <div className="weather">
                             <CustomImage weather={weather}/>
@@ -38,9 +36,7 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                             <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
                             <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
                         </div>
-                        <div className="card-details">
-                            <CardDetails weather={weather} type='second'/>
-                        </div>
+                        <CardDetails weather={weather} type='second'/>
                         </ div>
                         <hr className="hr" />
                         <div className="row mt-4">
