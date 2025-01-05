@@ -27,17 +27,20 @@ export default function Card({loadingData, showData, weather, forecast}){ //weat
                 { showData === true ? (
                     <div>
                         <div className="card-container">
-                        <CardDetails weather={weather} type='first'/>
-                        {console.log(weather.weather[0].description, ': description')}
-                        <div className="weather">
-                            <CustomImage weather={weather}/>
-                            <h3 className="title-city">{weather.name}</h3>
-                            <p className="date-card">{date}</p>
-                            <h2 className="temp-card">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
-                            <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
-                            <p>Min {(weather.main.temp_min - 273.15).toFixed(1)}ºC    -    Max{(weather.main.temp_max - 273.15).toFixed(1)}ºC</p>
-                        </div>
-                        <CardDetails weather={weather} type='second'/>
+                            <div className="not-show-card"><CardDetails weather={weather} type='first'/></div>
+                            {console.log(weather.weather[0].description, ': description')}
+                            <div className="weather">
+                                <CustomImage weather={weather}/>
+                                <h3 className="title-city">{weather.name}</h3>
+                                <p className="card-date">{date}</p>
+                                <h2 className="card-temp">{(weather.main.temp - 273.15).toFixed(1)}ºC</h2>
+                                <p className="description-card" >{capitalized(weather.weather[0].description)}</p>
+                                <p>Min {(weather.main.temp_min - 273.15).toFixed(1)}ºC    -    Max{(weather.main.temp_max - 273.15).toFixed(1)}ºC</p>
+                            </div>
+                            <div className="card-description-container">
+                                <CardDetails weather={weather} type='second'/>
+                                <div className="show-card"><CardDetails weather={weather} type='first'/> </ div>
+                            </div>
                         </ div>
                         <hr className="hr" />
                         <div className="row mt-4">
